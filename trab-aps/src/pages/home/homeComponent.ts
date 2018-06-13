@@ -26,6 +26,9 @@ export class HomeComponent implements OnInit {
     }
 
     goToSessions(movie: Movies) {
-        this.selectedMovie = movie
+        debugger;
+        //TODO: Mandar a imagem pro localStorage
+        localStorage.setItem('imageCurrent', movie.Image)
+        this.router.navigate(['/session',movie.Name, movie.Id])
     }
 }

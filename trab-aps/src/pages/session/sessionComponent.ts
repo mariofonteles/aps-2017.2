@@ -10,17 +10,20 @@ import { Movies } from "../../entities/Movies";
     templateUrl: 'sessionComponent.html',
     styleUrls: ['sessionComponent.scss']
 })
-export class sessionComponent implements OnChanges {
+export class sessionComponent implements OnInit {
     @Input() model: Movies; 
     sessions: Array<Session> = []
     selectedMovie: Movies
     selectedSession: Session
+    sub: any
 
     constructor( private sessionService: SessionService, private router: Router, private route: ActivatedRoute){}
 
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.model && changes.model.currentValue != changes.model.previousValue)
-            this.sessions = this.sessionService.listSessionsMock(this.model.Id)
+    ngOnInit() {
+        this.sub = this.route.params.subscribe( params => {
+            this.selectedMovie = new Movies({ Name: params.name, Id: params.id, Image: localStorage.getItem('imageCurrent')})
+            debugger;
+        })
     }
 
     goToSeats() {

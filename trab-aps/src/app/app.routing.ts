@@ -8,7 +8,7 @@ import { sessionComponent } from '../pages/session/sessionComponent';
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent, /*canActivate: [AuthService]*/ },
     { path: 'login', component: LoginComponent },
-    {path: 'sessions/:movie', component: sessionComponent },
+    {path: 'session/:name/:id', component: sessionComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'home' }
