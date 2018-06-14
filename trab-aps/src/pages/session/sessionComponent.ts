@@ -24,6 +24,7 @@ export class sessionComponent implements OnInit {
     sub: any
     weekDays: Array<any> = []
     sessionsShown: Array<Session> = []
+    isHovering: boolean = false
 
     constructor( private sessionService: SessionService, private router: Router, private route: ActivatedRoute){}
 

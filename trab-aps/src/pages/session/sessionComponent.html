@@ -23,18 +23,13 @@
                 {{theater.Name}}
         </div>
         <div class="card-body row">
-                <div class="col-4" *ngFor="let session of theater.Sessions" (click)="getTickets(session)">
-                <button class="btn btn-primary">{{session.Time}}</button>
+                <div class="col-2" *ngFor="let session of theater.Sessions" (click)="getTickets(session)">
+                <button class="btn btn-primary btn-block" (mouseenter)="session.isHovering = true" (mouseleave)="session.isHovering = false">
+                        <span *ngIf="!session.isHovering">{{session.Time}}</span> <span *ngIf="session.isHovering">Comprar</span>
+                </button>
                 </div>
         </div>
         </div>
 </div>
      </div>
 
-<div class="container">
-        <div class="row">
-                <div class="col-6">
-                <button class="btn btn-primary">Comprar ingressos</button>
-                </div>
-        </div>
-</div>

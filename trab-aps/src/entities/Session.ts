@@ -6,6 +6,7 @@ export class Session {
     Chairs: Array<string>
     TheaterId: number
     MovieId: number
+    isHovering: boolean = false
 
     constructor(data: any = {}) {
 
