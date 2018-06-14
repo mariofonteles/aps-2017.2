@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background: #f6f8d6;
+    background: #212529;
+}
+
+img {
+    width: 200px;
+    height: 300px;
+}
+
+p, h1, h2, h3, span, label, a {
+    color: white;
 }

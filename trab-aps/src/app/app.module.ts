@@ -14,6 +14,7 @@ import { HomeComponent } from '../pages/home/homeComponent';
 import { MovieService } from '../services/movieService';
 import { SessionService } from '../services/sessionService';
 import { sessionComponent } from '../pages/session/sessionComponent';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { sessionComponent } from '../pages/session/sessionComponent';
     FormsModule,
     routing,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [
     LoginService,

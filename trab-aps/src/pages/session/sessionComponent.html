@@ -1,28 +1,40 @@
-    <div *ngIf="!model" class="col-xs-12">
-                <span>Escolha um filme para escolher a sessão</span>
-    </div>
-    <div class="col-xs-6">
-    <div class="row">
-    <div *ngFor="let session of sessions" class="col-xs-2" (click)="selectedSession = session">
-        <button type="button" class="btn btn-primary sessions-btn">19:40</button>
-    </div>
-    </div>
+    
+    <div class="row border border-primary">
+        <div class="col-3">
+                <img class="img-session" src="{{selectedMovie.Image}}">
+        </div>
+        <div class="col">
+                <p>{{selectedMovie.Name}}</p>
+        </div>
     </div>
 
-    <div>
-            <div class="btn-group dropup dropdown-special">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Dia
+    <div class="row" style="margin-top: 10px">
+        <h2>Data</h2>
+            <div class="col-2" *ngFor="let day of weekDays">
+                    <button type="button" class="btn btn-outline-primary" [ngClass]="{'active': day.isSelected}" (click)="clickDay(day)">
+                            {{day.date}}
                     </button>
-                    <div class="dropdown-menu">
-                            <p class="dropdown-item" href="#">12/07</p>
-                            <p class="dropdown-item" href="#">15/07</p>
-                            <p class="dropdown-item" href="#">16/07</p>
-                    </div>
-                  </div>
-                  
+            </div>
     </div>
+    <div class="row" *ngFor="let theater of theaters">
+        <div class="container theater-container">
+    <div class="card row border border-primary" *ngIf="theater">
+        <div class="card-header">
+                {{theater.Name}}
+        </div>
+        <div class="card-body row">
+                <div class="col-4" *ngFor="let session of theater.Sessions" (click)="getTickets(session)">
+                <button class="btn btn-primary">{{session.Time}}</button>
+                </div>
+        </div>
+        </div>
+</div>
+     </div>
 
-    <div class="ingressos-div">
-            <button type="button" class="ingressos-btn btn btn-primary">Ingressos</button>
-    </div>
+<div class="container">
+        <div class="row">
+                <div class="col-6">
+                <button class="btn btn-primary">Comprar ingressos</button>
+                </div>
+        </div>
+</div>

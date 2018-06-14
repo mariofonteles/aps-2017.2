@@ -23,6 +23,22 @@
 
 }
 
+.img-session {
+    width: 100%;
+    height: 100%;
+}
+
 .dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu {
     bottom: auto !important;
+}
+
+.theater-container {
+    margin-bottom: 7px;
+
+    .card {
+        background-color: transparent !important;
+    }
+    .card-header {
+        color: white;
+    }
 }
