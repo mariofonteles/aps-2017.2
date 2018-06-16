@@ -1,19 +1,30 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SharedInfo } from "../shared/SharedInfo";
 import { Session } from "../entities/Session";
+import {RequestOptions } from '@angular/http';
 
+const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'my-auth-token'
+    })
+  };
 
 @Injectable()
 export class SessionService {
 
-    mockSessions
-
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient){
+    }
 
     listSessions(movieId: number) {
         return this.http.get<any>(`${SharedInfo.URL_BASE}/Sessions/obterSessoes?movieId=${movieId}`).toPromise()
         .then( sessoes => JSON.parse(sessoes))
+    }
+
+    send() {
+
+        return this.http.post<any>(`${SharedInfo.URL_BASE}/Sessions`, {}, httpOptions)
     }
 
     listSessionsMock(movieId: number) {

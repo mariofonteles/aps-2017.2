@@ -8,25 +8,28 @@
         </div>
     </div>
 
-    <div class="row" style="margin-top: 10px">
+    <!--<div class="row" style="margin-top: 10px">
         <h2>Data</h2>
             <div class="col-2" *ngFor="let day of weekDays">
                     <button type="button" class="btn btn-outline-primary" [ngClass]="{'active': day.isSelected}" (click)="clickDay(day)">
                             {{day.date}}
                     </button>
             </div>
-    </div>
+    </div>!-->
     <div class="row" *ngFor="let theater of theaters">
         <div class="container theater-container">
     <div class="card row border border-primary" *ngIf="theater">
         <div class="card-header">
                 {{theater.Name}}
         </div>
-        <div class="card-body row">
-                <div class="col-2" *ngFor="let session of theater.Sessions" (click)="getTickets(session)">
+        <div class="card-body row" *ngFor="let room of theater['Rooms']">
+                <div class="row container">
+                        <p>{{room.Name}}</p>
+                <div class="col-2" *ngFor="let session of room['Sessions']" (click)="getTickets(session, room, theater)">
                 <button class="btn btn-primary btn-block" (mouseenter)="session.isHovering = true" (mouseleave)="session.isHovering = false">
-                        <span *ngIf="!session.isHovering">{{session.Time}}</span> <span *ngIf="session.isHovering">Comprar</span>
+                        <span *ngIf="!session.isHovering">{{session.Time}} {{session.Date}}</span> <span *ngIf="session.isHovering">Comprar</span>
                 </button>
+                </div>
                 </div>
         </div>
         </div>

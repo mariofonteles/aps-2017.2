@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Movies } from "../../entities/Movies";
 import { DayDto } from "../../entities/Day";
 import { Theater } from "../../entities/Theater";
+import { Room } from "../../entities/Room";
 
 
 @Component({
@@ -33,18 +34,29 @@ export class sessionComponent implements OnInit {
             this.selectedMovie = new Movies({ Name: params.name, Id: params.id, Image: localStorage.getItem('imageCurrent')})
         })
 
+        let rooms = [ new Room( {
+            Name: 'Sala 1',
+            Id: 1,
+            Sessions: [new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '19:40'}), 
+            new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '16:40'})]
+        }),
+        new Room( {
+            Name: 'Sala 2',
+            Id: 2,
+            Sessions:  [new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '14:40'}), 
+            new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '13:40'})]
+        })]
+
         this.sessions = [ new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '19:40'})
         ,
         new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '18:40'}),
         new Session({Date: `${new Date().getDate()+2}/0${new Date().getMonth()+1}`, Time: '17:40'}),
         new Session({Date: `${new Date().getDate()+3}/0${new Date().getMonth()+1}`, Time: '15:40'})]
 
-        this.theatersFromApi = [ new Theater({Name: 'Cinema 1', Id: 1, Sessions: this.sessions}), 
-                          new Theater({Name: 'Cinema 2', Id: 2, 
-                          Sessions: [new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '18:40'})]})
-                        ]
+        this.theatersFromApi = [ new Theater({Name: 'Cinema 1', Id: 1, Rooms: rooms})]
+        debugger;
         localStorage.setItem('theaters', JSON.stringify(this.theatersFromApi))
-        this.theaters = this.theaters
+        this.theaters = this.theatersFromApi
 
         this.weekDays = [{date: `${new Date().getDate()}/0${new Date().getMonth()+1}`}, 
         {date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`},
@@ -59,15 +71,17 @@ export class sessionComponent implements OnInit {
         this.theaters = []
 
         let theatersLocal:Array<Theater> = JSON.parse(localStorage.getItem('theaters'))
-        this.theaters = theatersLocal.map( theater => {
-            theater.Sessions = theater.Sessions.filter(session => session.Date == day.date)
-            return theater.Sessions.length > 0? theater : null
-        })
         //this.sessionsShown = this.sessions.filter( session => session.Date == day.date)
     }
 
-    getTickets(session: Session) {
-        localStorage.setItem('selectedSession', JSON.stringify(session))
+    getTickets(session: Session, room: Room, theater: Theater) {
+        debugger;
+        let selecaoDto = {
+            session: Session,
+            room: Room,
+            theater: Theater
+        }
+        localStorage.setItem('selectedSession', JSON.stringify(selecaoDto))
         this.router.navigate(['/tickets'])
     }
 
