@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row border border-primary">
+            <div class="col-4" style="padding-left: 0px">
+                    <img class="img-session" src="{{selectedMovie.Image}}">
+            </div>
+            <div class="col">
+                    <p>{{selectedMovie.Name}}</p>
+                    <p>{{viewModelDto.cinemaName}}</p>
+                    <p>{{viewModelDto.roomName}}</p>
+                    <p>{{viewModelDto.session.Date}} às {{viewModelDto.session.Time}}</p>
+            </div>
+    </div>
+
+    <div class="row">
+        <h3>Assentos</h3>
+        <div *ngFor="let seat of seats">
+            <div class="col-1">
+                <button (click)="selectSeat(seat)" class="btn btn-seat {{seat.clicked? 'btn-clicked' : 'btn-primary'}}">{{seat.number}}{{seat.letter}}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" *ngFor="let seat of selectedSeats">
+        <h4>{{seat.number}}{{seat.letter}}</h4>
+        <p>Ingresso: {{seat.price}}</p>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" (click)="changePrice(seat)" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                Estudante
+            </label>
+        </div>
+    </div>
+
+</div>
+
+<div class="checkout-div">
+        <p>Preço total: R${{currentPrice}}</p>
+        <div class="col-3">
+        <button class="btn btn-primary" (click)="buy()">COMPRAR</button>
+        </div>
+    </div>

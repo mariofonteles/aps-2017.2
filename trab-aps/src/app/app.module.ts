@@ -15,13 +15,15 @@ import { MovieService } from '../services/movieService';
 import { SessionService } from '../services/sessionService';
 import { sessionComponent } from '../pages/session/sessionComponent';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CheckoutComponent } from '../pages/checkout/checkoutComponent';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    sessionComponent
+    sessionComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   bootstrap: [AppComponent, 
   LoginComponent,
   HomeComponent,
-  sessionComponent
+  sessionComponent,
+  CheckoutComponent
 ]
 })
 export class AppModule { }

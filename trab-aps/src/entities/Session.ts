@@ -6,6 +6,7 @@ export class Session {
     Chairs: Array<string>
     TheaterId: number
     MovieId: number
+    price: string
     isHovering: boolean = false
 
     constructor(data: any = {}) {
@@ -15,5 +16,6 @@ export class Session {
         this.Chairs = data.Chairs
         this.MovieId = data.MovieId
         this.TheaterId = data.TheaterId
+        this.price = data.price
     }
 }

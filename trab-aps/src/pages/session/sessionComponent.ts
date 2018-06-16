@@ -6,6 +6,7 @@ import { Movies } from "../../entities/Movies";
 import { DayDto } from "../../entities/Day";
 import { Theater } from "../../entities/Theater";
 import { Room } from "../../entities/Room";
+import { Seat } from "../../entities/Seat";
 
 
 @Component({
@@ -37,21 +38,17 @@ export class sessionComponent implements OnInit {
         let rooms = [ new Room( {
             Name: 'Sala 1',
             Id: 1,
-            Sessions: [new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '19:40'}), 
-            new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '16:40'})]
+            Sessions: [new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '19:40', price: "19.00"}), 
+            new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '16:40', price: "19.00",})],
+            free_seats: [ new Seat({id: '1', number: 1, letter: 'A'}), new Seat({id: '2', number: 2, letter: 'A'})]
         }),
         new Room( {
             Name: 'Sala 2',
             Id: 2,
-            Sessions:  [new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '14:40'}), 
-            new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '13:40'})]
+            Sessions:  [new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '14:40', price: "19.00",}), 
+            new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '13:40', price: "19.00",})],
+            free_seats: [ new Seat({id: '1', number: 1, letter: 'A'}), new Seat({id: '2', number: 2, letter: 'A'})]
         })]
-
-        this.sessions = [ new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '19:40'})
-        ,
-        new Session({Date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`, Time: '18:40'}),
-        new Session({Date: `${new Date().getDate()+2}/0${new Date().getMonth()+1}`, Time: '17:40'}),
-        new Session({Date: `${new Date().getDate()+3}/0${new Date().getMonth()+1}`, Time: '15:40'})]
 
         this.theatersFromApi = [ new Theater({Name: 'Cinema 1', Id: 1, Rooms: rooms})]
         debugger;
@@ -77,12 +74,14 @@ export class sessionComponent implements OnInit {
     getTickets(session: Session, room: Room, theater: Theater) {
         debugger;
         let selecaoDto = {
-            session: Session,
-            room: Room,
-            theater: Theater
+            session: session,
+            room: room,
+            theater: theater,
+            movie: this.selectedMovie
         }
+        debugger;
         localStorage.setItem('selectedSession', JSON.stringify(selecaoDto))
-        this.router.navigate(['/tickets'])
+        this.router.navigate(['/checkout'])
     }
 
     goToSeats() {
