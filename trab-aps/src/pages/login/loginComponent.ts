@@ -18,10 +18,14 @@ export class LoginComponent {
 
     public login () {
         if (this.isAdmin) {
-            this.loginService.loginAdmin(this.userModel.username, this.userModel.password)
+            return this.loginService.loginAdmin(this.userModel.username, this.userModel.password)
             .then ( admin => {
-                if (admin)
-                    return this.router.navigate(['/admin'])
+                if (admin) {
+                    this.router.navigate(['/admin'])
+                    localStorage.setItem('currentUser', this.userModel.username)
+                    localStorage.setItem('isAdmin', JSON.stringify({isAdmin: true}))
+                    return 
+                }
             })
         }
         this.loginService.login(this.userModel.username, this.userModel.password)

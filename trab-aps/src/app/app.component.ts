@@ -13,4 +13,8 @@ export class AppComponent {
     //router.navigate(['/login'])
   }
 
+  get isAdmin() {
+    return localStorage.getItem('isAdmin')? true : false
+  }
+
 }

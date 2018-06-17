@@ -11,6 +11,18 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Ingressos</a>
       </li>
+      <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" href="#">CRUD Cinema</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+            <a class="nav-link" href="#">CRUD Filme</a>
+          </li>
+          <li class="nav-item" *ngIf="isAdmin">
+              <a class="nav-link" href="#">CRUD Sala</a>
+            </li>
+            <li class="nav-item" *ngIf="isAdmin">
+                <a class="nav-link" href="#">CRUD Sessão</a>
+              </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
