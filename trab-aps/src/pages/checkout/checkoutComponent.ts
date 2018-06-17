@@ -10,12 +10,19 @@ import { Movies } from "../../entities/Movies";
 })
 export class CheckoutComponent implements OnInit {
 
+    get currentPrice() {
+        if(this.selectedSeats.length > 0)
+            return this.selectedSeats.map( seat => Number(seat.price)).reduce( (seatPrev, seatNext) => Number(seatPrev + seatNext))
+        else 
+            return 0.00
+    }
+
     selectedSession: any
     selectedSeats: Array<Seat> = []
     viewModelDto: any
     seats: Array<Seat>
     selectedMovie: Movies
-    //currentPrice: number = 0.00
+    payment: any = {}
 
     constructor(){}
 
@@ -32,47 +39,28 @@ export class CheckoutComponent implements OnInit {
             sessionPrice: this.selectedSession.session.price
         }
 
-
         this.seats = this.selectedSession.room.free_seats
         this.seats.map( seat => seat.price = this.viewModelDto.sessionPrice) 
-        debugger;
     }
 
     selectSeat(seat: Seat) {
         seat.clicked = !seat.clicked
-        if (this.selectedSeats.includes(seat)) {
+        if (this.selectedSeats.includes(seat))
             this.selectedSeats = this.selectedSeats.filter( seatInArray => seatInArray != seat)
-        }
         else 
             this.selectedSeats.push(seat)
 
-        //this.currentPrice = this.viewModelDto.sessionPrice * this.selectedSeats.length
     }
 
     changePrice(seatSelected: Seat) {
-        if (seatSelected.price == 19.00) {
+        if (seatSelected.price == this.selectedSession.session.price) 
             seatSelected.price = seatSelected.price/2
-            debugger;
-            //this.currentPrice = this.currentPrice/2
-        }
-        else if (seatSelected.price == 19.00/2) {
-
-            seatSelected.price = seatSelected.price * 2
-            debugger;
-            //this.currentPrice = this.currentPrice * 2
-        }
-
-            //return this.selectedSeats.map( seat => seat.price = seat.id == seatSelected.id? seat.price*2 : seat.price)
-    }
-
-    get currentPrice() {
-        if(this.selectedSeats.length > 0)
-            return this.selectedSeats.map( seat => Number(seat.price)).reduce( (seatPrev, seatNext) => Number(seatPrev + seatNext))
         else 
-            return 0.00
+            seatSelected.price = seatSelected.price * 2
     }
 
     buy() {
+        debugger;
         let buyDto = {
             seats: this.selectedSeats,
 

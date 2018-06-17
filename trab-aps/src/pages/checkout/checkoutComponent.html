@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row border border-primary">
+    <div class="row border border-info">
             <div class="col-4" style="padding-left: 0px">
                     <img class="img-session" src="{{selectedMovie.Image}}">
             </div>
@@ -11,8 +11,8 @@
             </div>
     </div>
 
+    <h3>Assentos</h3>
     <div class="row">
-        <h3>Assentos</h3>
         <div *ngFor="let seat of seats">
             <div class="col-1">
                 <button (click)="selectSeat(seat)" class="btn btn-seat {{seat.clicked? 'btn-clicked' : 'btn-primary'}}">{{seat.number}}{{seat.letter}}</button>
@@ -31,6 +31,30 @@
         </div>
     </div>
 
+</div>
+
+<div class="conainer">
+        <div class="form-group">
+            <label>
+                Forma de pagamento
+            </label>
+            <select class="form-control" [(ngModel)]="payment.Method">
+                <option value="debito">Débito</option>
+                <option value="credito">Crédito</option>
+            </select>
+            <label>Número do cartão</label>
+            <input [(ngModel)]="payment.cardNumber" class="form-control" type="number">
+            <label>Data de validade</label>
+            <input [(ngModel)]="payment.dueDate" class="form-control" type="date">
+            <label>Nome no cartão</label>
+            <input [(ngModel)]="payment.cardHolderName" class="form-control" type="text">
+            <label>Número de segurança</label>
+            <input [(ngModel)]="payment.securityNumber" class="form-control"  type="number">
+            <div class="form-check" *ngIf="currentPrice >= 30">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="payment.parcelado">
+                    <label class="form-check-label" for="exampleCheck1">Parcelar em 2x</label>
+            </div>
+        </div>
 </div>
 
 <div class="checkout-div">

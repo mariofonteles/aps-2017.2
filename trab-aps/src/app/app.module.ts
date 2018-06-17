@@ -16,6 +16,7 @@ import { SessionService } from '../services/sessionService';
 import { sessionComponent } from '../pages/session/sessionComponent';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from '../pages/checkout/checkoutComponent';
+import { addRoomsComponent } from '../pages/admin/add-rooms/addRoomsComponent';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CheckoutComponent } from '../pages/checkout/checkoutComponent';
     LoginComponent,
     HomeComponent,
     sessionComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    addRoomsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { CheckoutComponent } from '../pages/checkout/checkoutComponent';
   LoginComponent,
   HomeComponent,
   sessionComponent,
-  CheckoutComponent
+  CheckoutComponent,
+  addRoomsComponent
 ]
 })
 export class AppModule { }

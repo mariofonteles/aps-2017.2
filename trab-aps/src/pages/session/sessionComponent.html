@@ -25,8 +25,8 @@
         <div class="card-body row" *ngFor="let room of theater['Rooms']">
                 <div class="row container">
                         <p>{{room.Name}}</p>
-                <div class="col-2" *ngFor="let session of room['Sessions']" (click)="getTickets(session, room, theater)">
-                <button class="btn btn-primary btn-block" (mouseenter)="session.isHovering = true" (mouseleave)="session.isHovering = false">
+                <div class="col-3" *ngFor="let session of room['Sessions']" (click)="getTickets(session, room, theater)">
+                <button class="btn btn-primary btn-session" (mouseenter)="session.isHovering = true" (mouseleave)="session.isHovering = false">
                         <span *ngIf="!session.isHovering">{{session.Time}} {{session.Date}}</span> <span *ngIf="session.isHovering">Comprar</span>
                 </button>
                 </div>

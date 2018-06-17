@@ -13,7 +13,4 @@ export class AppComponent {
     //router.navigate(['/login'])
   }
 
-  goToLogin() {
-    this.router.navigate(['/login'])
-  }
 }

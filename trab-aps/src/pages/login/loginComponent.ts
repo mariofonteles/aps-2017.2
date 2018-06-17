@@ -3,6 +3,7 @@ import { LoginService } from "../../services/loginService";
 import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
+    selector: 'login-page',
     templateUrl: './loginComponent.html',
     styleUrls: ['./loginComponent.scss']
 })
