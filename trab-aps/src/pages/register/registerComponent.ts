@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { User } from "../../entities/User";
+import { RegisterService } from "../../services/registerService";
 
 
 @Component({
@@ -13,7 +14,7 @@ export class RegisterComponent {
 
     
 
-    constructor() {}
+    constructor(private registerService: RegisterService) {}
 
 
     register() {
@@ -25,6 +26,9 @@ export class RegisterComponent {
             location: this.userModel.location,
             birth_date: this.userModel.birthdate
         }
+
+        this.registerService.registerUser(payloadDto)
+
     }
 
     

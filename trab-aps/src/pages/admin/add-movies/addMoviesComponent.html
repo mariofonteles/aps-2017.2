@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="form-group">
+            <label for="exampleFormControlSelect1">Escolha o cinema</label>
+            <select class="form-control" [(ngModel)]="selectedStore" required>
+              <option value="{{theater.Id}}" *ngFor="let theater of stores">{{theater.Name}}</option>
+            </select>
+    </div>
+    <div *ngFor="let movie of movies">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Nome do filme</label>
+        <input type="email" class="form-control" [(ngModel)] = "movie.Name" required>
+        <label for="exampleInputEmail1">Imagem</label>
+        <input type="file" class="form-control" (change)="handleFileSelect($event, movie)" required>
+        <label for="exampleInputEmail1">Classificação</label>
+        <input type="email" class="form-control" [(ngModel)] = "movie.Age" required>
+        <label for="exampleInputEmail1">Gênero</label>
+        <input type="email" class="form-control" [(ngModel)] = "movie.Gender" required>
+    </div>
+    </div>
+    <button  (click)="addMovie()"class="btn btn-primary">+ sala</button>
+    <div class="row">
+    <div class="container">
+            <button class="btn btn-success" (click)="submit()"> Enviar</button>
+    </div>
+    </div>
+</div>

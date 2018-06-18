@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
         debugger;
         //TODO: Mandar a imagem pro localStorage
         localStorage.setItem('imageCurrent', movie.Image)
+        localStorage.setItem('selectedMovie', JSON.stringify(movie))
         this.router.navigate(['/session',movie.Name, movie.Id])
     }
 }

@@ -7,7 +7,7 @@ const httpOptions = {
       'Content-Type':  'application/json',
       'Authorization': 'my-auth-token'
     }),
-    token: `Token ${localStorage.getItem('userToken')}`
+    //token: `Token ${localStorage.getItem('userToken')}`
   };
 
 
@@ -17,6 +17,19 @@ export class RegisterService {
     constructor( private http: HttpClient){}
 
     registerUser(payload: any) {
-        return this.http.post<any>(`${SharedInfo.URL_BASE}/clients`, payload, httpOptions)
+        let httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/json',
+              'Authorization': 'Token '+localStorage.getItem('userToken')
+            })
+          }
+        return this.http.post<any>(`http://localhost:8000/api/clients/`, JSON.stringify(payload), httpOptions).toPromise()
+        .then( r => {
+            debugger;
+            console.log(JSON.parse(r))
+        }, e => {
+            debugger;
+            console.log(e)
+        })
     }
 }

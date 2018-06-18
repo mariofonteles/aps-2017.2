@@ -31,6 +31,7 @@ export class sessionComponent implements OnInit {
     constructor( private sessionService: SessionService, private router: Router, private route: ActivatedRoute){}
 
     ngOnInit() {
+        let realMovie = JSON.parse(localStorage.getItem('selectedMovie'))
         this.sub = this.route.params.subscribe( params => {
             this.selectedMovie = new Movies({ Name: params.name, Id: params.id, Image: localStorage.getItem('imageCurrent')})
         })

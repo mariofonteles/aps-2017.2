@@ -20,6 +20,7 @@ import { addRoomsComponent } from '../pages/admin/add-rooms/addRoomsComponent';
 import { TicketsComponent } from '../pages/tickets/ticketsComponent';
 import { RegisterComponent } from '../pages/register/registerComponent';
 import { RegisterService } from '../services/registerService';
+import { addMoviesComponent } from '../pages/admin/add-movies/addMoviesComponent';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RegisterService } from '../services/registerService';
     CheckoutComponent,
     addRoomsComponent,
     TicketsComponent,
-    RegisterComponent
+    RegisterComponent,
+    addMoviesComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { RegisterService } from '../services/registerService';
   CheckoutComponent,
   addRoomsComponent,
   TicketsComponent,
-  RegisterComponent
+  RegisterComponent,
+  addMoviesComponent
 ]
 })
 export class AppModule { }

@@ -9,7 +9,7 @@ export class MovieService {
 
     constructor( private HttpClient: HttpClient){}
 
-    public getAllMovies() {
+    public getAllMovies(): any {
         this.HttpClient.get<any>(`${SharedInfo.URL_BASE}/Movie`)
         .toPromise().then( movies => JSON.parse(movies))
     }

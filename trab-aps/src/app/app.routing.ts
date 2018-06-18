@@ -8,6 +8,7 @@ import { CheckoutComponent } from '../pages/checkout/checkoutComponent';
 import { addRoomsComponent } from '../pages/admin/add-rooms/addRoomsComponent';
 import { TicketsComponent } from '../pages/tickets/ticketsComponent';
 import { RegisterComponent } from '../pages/register/registerComponent';
+import { addMoviesComponent } from '../pages/admin/add-movies/addMoviesComponent';
 
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent, /*canActivate: [AuthService]*/ },
@@ -17,9 +18,10 @@ const appRoutes: Routes = [
     {path: 'admin/addRooms', component: addRoomsComponent},
     {path: 'tickets', component: TicketsComponent},
     {path: 'register', component: RegisterComponent},
+    {path: 'admin/addMovies', component: addMoviesComponent},
 
     // otherwise redirect to home
-    { path: '**', redirectTo: 'login' }
+    { path: '**', redirectTo: 'home' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
