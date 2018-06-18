@@ -7,6 +7,7 @@ export class Session {
     TheaterId: number
     MovieId: number
     price: string
+    daysOfWeek: Array<any>
     isHovering: boolean = false
 
     constructor(data: any = {}) {

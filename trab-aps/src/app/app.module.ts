@@ -17,6 +17,9 @@ import { sessionComponent } from '../pages/session/sessionComponent';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CheckoutComponent } from '../pages/checkout/checkoutComponent';
 import { addRoomsComponent } from '../pages/admin/add-rooms/addRoomsComponent';
+import { TicketsComponent } from '../pages/tickets/ticketsComponent';
+import { RegisterComponent } from '../pages/register/registerComponent';
+import { RegisterService } from '../services/registerService';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { addRoomsComponent } from '../pages/admin/add-rooms/addRoomsComponent';
     HomeComponent,
     sessionComponent,
     CheckoutComponent,
-    addRoomsComponent
+    addRoomsComponent,
+    TicketsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,14 +44,17 @@ import { addRoomsComponent } from '../pages/admin/add-rooms/addRoomsComponent';
     LoginService,
     AuthService,
     MovieService,
-    SessionService
+    SessionService,
+    RegisterService
   ],
   bootstrap: [AppComponent, 
   LoginComponent,
   HomeComponent,
   sessionComponent,
   CheckoutComponent,
-  addRoomsComponent
+  addRoomsComponent,
+  TicketsComponent,
+  RegisterComponent
 ]
 })
 export class AppModule { }

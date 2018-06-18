@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { LoginService } from "../../services/loginService";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
     templateUrl: './loginComponent.html',
     styleUrls: ['./loginComponent.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
     userModel: any = {}
     loading: boolean = false
@@ -15,9 +15,29 @@ export class LoginComponent {
 
     constructor (private loginService: LoginService, private router: Router, private route: ActivatedRoute){ }
 
+    ngOnInit() {
+        if (localStorage.getItem('currentUser') || localStorage.getItem('userToken'))
+            return this.router.navigate(['/home'])
+    }
+
 
     public login () {
+
+        debugger;
+
         if (this.isAdmin) {
+            localStorage.setItem('currentUser', JSON.stringify(this.userModel))
+            localStorage.setItem('userToken', 'reb43tewy3')
+            localStorage.setItem('isAdmin', JSON.stringify({isAdmin: true}))
+            return this.router.navigate(['/home'])
+        }
+        localStorage.setItem('currentUser', JSON.stringify(this.userModel))
+        localStorage.setItem('userToken', 'reb43tewy3')
+        return this.router.navigate(['/home'])
+
+
+        //PRA API
+        /*if (this.isAdmin) {
             return this.loginService.loginAdmin(this.userModel.username, this.userModel.password)
             .then ( admin => {
                 if (admin) {
@@ -36,7 +56,7 @@ export class LoginComponent {
             }
 
             return false
-        })
+        })*/
 
     }
 }
