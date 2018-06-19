@@ -4,14 +4,6 @@ import { SharedInfo } from "../shared/SharedInfo";
 import { Session } from "../entities/Session";
 import {RequestOptions } from '@angular/http';
 
-const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'my-auth-token'
-    }),
-    token: `Token ${localStorage.getItem('userToken')}`
-  };
-
 @Injectable()
 export class SessionService {
 
@@ -23,9 +15,25 @@ export class SessionService {
         .then( sessoes => JSON.parse(sessoes))
     }
 
-    send() {
+    send(payload) {
 
-        return this.http.post<any>(`${SharedInfo.URL_BASE}/Sessions`, {}, httpOptions)
+        console.log(localStorage.getItem('userToken'))
+        let httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/json',
+              'Authorization': 'Token '+localStorage.getItem('userToken')
+            })
+          }
+
+        debugger;
+
+        return this.http.post<any>('http://localhost:8000/api/v1/sessions', JSON.stringify(payload), httpOptions).toPromise()
+        .then( r => {
+            debugger;
+            return r
+        }, e => {
+            debugger;
+        })
     }
 
     listSessionsMock(movieId: number) {

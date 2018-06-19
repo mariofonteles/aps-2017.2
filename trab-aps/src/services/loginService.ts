@@ -10,20 +10,34 @@ export class LoginService {
 
     public login (username: string, password: string) {
 
-        return this.http.post<any>( `${SharedInfo.URL_BASE}/login`, { username: username, password: password })
+        let httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/json',
+              //'Authorization': 'Token '+localStorage.getItem('userToken')
+            })
+          }
+          debugger;
+        return this.http.post<any>( `http://localhost:8000/api/auth/login`, JSON.stringify({ email: username, password: password }), httpOptions)
         .toPromise().then( user => {
             if (user) 
-                localStorage.setItem('userToken', JSON.parse(user).token)
+                localStorage.setItem('userToken', user.token)
             
             return user
         })
     }
 
     public loginAdmin( admin: string, password: string) {
-        return this.http.post<any>(`${SharedInfo.URL_BASE}/Admin`, {email: admin, password: password})
+        let httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/json',
+              //'Authorization': 'Token '+localStorage.getItem('userToken')
+            })
+          }
+          debugger;
+        return this.http.post<any>(`http://localhost:8000/api/auth/login`,JSON.stringify({ email: admin, password: password }), httpOptions)
         .toPromise().then( res => {
             if (res)
-                localStorage.setItem('adminToken', JSON.parse(res).token)
+                localStorage.setItem('userToken', res.token)
             return res
         })
     }

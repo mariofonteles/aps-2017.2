@@ -21,6 +21,12 @@ import { TicketsComponent } from '../pages/tickets/ticketsComponent';
 import { RegisterComponent } from '../pages/register/registerComponent';
 import { RegisterService } from '../services/registerService';
 import { addMoviesComponent } from '../pages/admin/add-movies/addMoviesComponent';
+import { AddStoresComponent } from '../pages/admin/add-stores/addStoresComponent';
+import { AddSessionComponent } from '../pages/admin/add-sessions/addSessionComponent';
+import { adminComponent } from '../pages/admin/adminComponent';
+import { StoreService } from '../services/storeService';
+import { RoomService } from '../services/roomService';
+import { CheckoutService } from '../services/checkoutService';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,10 @@ import { addMoviesComponent } from '../pages/admin/add-movies/addMoviesComponent
     addRoomsComponent,
     TicketsComponent,
     RegisterComponent,
-    addMoviesComponent
+    addMoviesComponent,
+    AddStoresComponent,
+    AddSessionComponent,
+    adminComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +56,11 @@ import { addMoviesComponent } from '../pages/admin/add-movies/addMoviesComponent
     AuthService,
     MovieService,
     SessionService,
-    RegisterService
+    RegisterService,
+    StoreService,
+    RoomService,
+    SessionService,
+    CheckoutService
   ],
   bootstrap: [AppComponent, 
   LoginComponent,
@@ -57,7 +70,10 @@ import { addMoviesComponent } from '../pages/admin/add-movies/addMoviesComponent
   addRoomsComponent,
   TicketsComponent,
   RegisterComponent,
-  addMoviesComponent
+  addMoviesComponent,
+  AddStoresComponent,
+  AddSessionComponent,
+  adminComponent
 ]
 })
 export class AppModule { }

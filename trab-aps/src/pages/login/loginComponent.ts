@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
     templateUrl: './loginComponent.html',
     styleUrls: ['./loginComponent.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent {
 
     userModel: any = {}
     loading: boolean = false
@@ -15,17 +15,17 @@ export class LoginComponent implements OnInit{
 
     constructor (private loginService: LoginService, private router: Router, private route: ActivatedRoute){ }
 
-    ngOnInit() {
+    /*ngOnInit() {
         if (localStorage.getItem('currentUser') || localStorage.getItem('userToken'))
             return this.router.navigate(['/home'])
-    }
+    }*/
 
 
     public login () {
 
         debugger;
 
-        if (this.isAdmin) {
+        /*if (this.isAdmin) {
             localStorage.setItem('currentUser', JSON.stringify(this.userModel))
             localStorage.setItem('userToken', 'reb43tewy3')
             localStorage.setItem('isAdmin', JSON.stringify({isAdmin: true}))
@@ -33,11 +33,11 @@ export class LoginComponent implements OnInit{
         }
         localStorage.setItem('currentUser', JSON.stringify(this.userModel))
         localStorage.setItem('userToken', 'reb43tewy3')
-        return this.router.navigate(['/home'])
+        return this.router.navigate(['/home'])*/
 
 
         //PRA API
-        /*if (this.isAdmin) {
+        if (this.isAdmin) {
             return this.loginService.loginAdmin(this.userModel.username, this.userModel.password)
             .then ( admin => {
                 if (admin) {
@@ -52,11 +52,14 @@ export class LoginComponent implements OnInit{
         .then( userAuth => {
             if (userAuth) {
                 localStorage.setItem('currentUser', this.userModel.username)
+                debugger;
                 return this.router.navigate(['/home'])
             }
 
+            debugger;
+
             return false
-        })*/
+        })
 
     }
 }

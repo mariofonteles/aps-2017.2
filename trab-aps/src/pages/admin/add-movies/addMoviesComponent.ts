@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { MovieService } from "../../../services/movieService";
 import { Movies } from "../../../entities/Movies";
 import { Theater } from "../../../entities/Theater";
+import { StoreService } from "../../../services/storeService";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -13,19 +15,26 @@ export class addMoviesComponent implements OnInit{
 
     stores: Array<any>
     movies: Array<Movies> = [new Movies()]
-    selectedStore: Theater
+    selectedStore: Array<number>
     base64forMovie: string
     currentMovieImg: Movies
 
-    constructor( private movieService: MovieService){}
+    movie: Movies = new Movies()
+
+    constructor( private movieService: MovieService, private storeService: StoreService, private router: Router){}
 
     async ngOnInit() {
+
+        this.storeService.getStores().then( r => {
+            this.stores = r
+        })
         
         this.stores = ['1','2']//pegar os cinemas dps
     }
 
-    addStore() {
-        this.movies.push(new Movies())
+    addStore(event: any) {
+        debugger;
+        this.selectedStore.push(event)
     }
 
     handleFileSelect(event: any, movie: any) {
@@ -47,13 +56,30 @@ export class addMoviesComponent implements OnInit{
         debugger;
         var binaryString = readerEvt.target.result;
         console.log(binaryString)
-               this.currentMovieImg.Image = btoa(binaryString);
+               this.movie.photo_poster = btoa(binaryString);
                console.log(this.currentMovieImg);
         debugger;
        }
    
 
     send() {
+
+        let payload = {
+            stores_id: this.selectedStore.map(item => Number(item)),
+            censorship: Number(this.movie.censorship),
+            photo_poster: null,
+            title: this.movie.title,
+            synopsis: this.movie.synopsis,
+            director: this.movie.director,
+            genre: Number(this.movie.genre),
+            duration: Number(this.movie.duration)
+        }
+
+        debugger;
+
+        return this.movieService.addMovie(payload).then( r => {
+            this.router.navigate(['/admin'])
+        })
 
     }
 }

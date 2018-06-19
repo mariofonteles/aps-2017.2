@@ -7,8 +7,12 @@
         </div>
         <div *ngFor="let room of rooms">
         <div class="form-group">
-            <label for="exampleInputEmail1">Nome da Sala</label>
-            <input type="email" class="form-control" [(ngModel)] = "room.Name" required>
+            <label for="exampleInputEmail1">Número da sala</label>
+            <input type="number" class="form-control" [(ngModel)] = "room.number" required>
+            <label for="exampleInputEmail1">Número de fileiras</label>
+            <input type="number" class="form-control" [(ngModel)] = "room.number_rows" required>
+            <label for="exampleInputEmail1">Número de cadeiras por fila</label>
+            <input type="number" class="form-control" [(ngModel)] = "room.number_seats_by_row" required>
         </div>
         </div>
         <button  (click)="addRoom()"class="btn btn-primary">+ sala</button>

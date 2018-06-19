@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { SharedInfo } from "../shared/SharedInfo";
 import { Movies } from "../entities/Movies";
 
@@ -9,14 +9,32 @@ export class MovieService {
 
     constructor( private HttpClient: HttpClient){}
 
-    public getAllMovies(): any {
-        this.HttpClient.get<any>(`${SharedInfo.URL_BASE}/Movie`)
-        .toPromise().then( movies => JSON.parse(movies))
+    public getAllMovies() {
+        return this.HttpClient.get<any>(`http://localhost:8000/api/v1/movies/home_movies`)
+        .toPromise().then( movies => movies, e => {
+            debugger;
+        })
     }
 
-    public addMovie(movie: Movies) {
-        this.HttpClient.post<any>(`${SharedInfo.URL_BASE}/Movie/Add`, movie)
-        .toPromise().then( res => JSON.parse(res))
+    public getMoviesAdmin() {
+        return this.HttpClient.get<any>('http://localhost:8000/api/v1/movies').toPromise()
+        .then( r => {
+            debugger;
+            return r;
+        })
+    }
+
+    public addMovie(movie: any) {
+        let httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type':  'application/json',
+              'Authorization': 'Token '+localStorage.getItem('userToken')
+            })
+          }
+        return this.HttpClient.post<any>(`http://localhost:8000/api/v1/movies`, JSON.stringify(movie), httpOptions)
+        .toPromise().then( res => {
+            debugger;
+            return res})
     }
 
     getAllMoviesMock() {

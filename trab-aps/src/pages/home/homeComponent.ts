@@ -22,7 +22,14 @@ export class HomeComponent implements OnInit {
     }
 
     listMovies() {
-        return this.movies = this.movieService.getAllMoviesMock()
+        debugger;
+        this.movieService.getAllMovies().then( movies => {
+            debugger;
+            this.movies = movies
+            if (!this.movies[0].photo_poster) {
+                this.movies[0].photo_poster = 'assets/download.jpg'
+            }
+        })
     }
 
     goToSessions(movie: Movies) {
@@ -30,6 +37,6 @@ export class HomeComponent implements OnInit {
         //TODO: Mandar a imagem pro localStorage
         localStorage.setItem('imageCurrent', movie.Image)
         localStorage.setItem('selectedMovie', JSON.stringify(movie))
-        this.router.navigate(['/session',movie.Name, movie.Id])
+        this.router.navigate(['/session'])
     }
 }

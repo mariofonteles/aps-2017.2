@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row border border-info">
             <div class="col-4" style="padding-left: 0px">
-                    <img class="img-session" src="{{selectedMovie.Image}}">
+                    <img class="img-session" src="{{selectedMovie.photo_poster}}">
             </div>
             <div class="col">
-                    <p>{{selectedMovie.Name}}</p>
+                    <p>{{selectedMovie.title}}</p>
                     <p>{{viewModelDto.cinemaName}}</p>
-                    <p>{{viewModelDto.roomName}}</p>
-                    <p>{{viewModelDto.session.Date}} às {{viewModelDto.session.Time}}</p>
+                    <p>Sala {{viewModelDto.roomName}}</p>
+                    <p>{{viewModelDto.date.replace('-','/').replace('-','/')}} às {{viewModelDto.session.start_session}}</p>
             </div>
     </div>
 
@@ -22,7 +22,7 @@
 
     <div class="container" *ngFor="let seat of selectedSeats">
         <h4>{{seat.number}}{{seat.letter}}</h4>
-        <p>Ingresso: {{seat.price}}</p>
+        <p>Ingresso: R${{seat.price}}</p>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" (click)="changePrice(seat)" id="defaultCheck1">
             <label class="form-check-label" for="defaultCheck1">

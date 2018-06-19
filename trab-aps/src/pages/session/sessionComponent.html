@@ -1,10 +1,10 @@
 <div class="container">   
 <div class="row border border-primary">
         <div class="col-3">
-                <img class="img-session" src="{{selectedMovie.Image}}">
+                <img class="img-session" src="{{selectedMovie.photo_poster}}">
         </div>
         <div class="col">
-                <p>{{selectedMovie.Name}}</p>
+                <p>{{selectedMovie.title}}</p>
         </div>
     </div>
 
@@ -20,15 +20,17 @@
         <div class="container theater-container">
     <div class="card row border border-primary" *ngIf="theater">
         <div class="card-header">
-                {{theater.Name}}
+                {{theater.name}}
         </div>
-        <div class="card-body row" *ngFor="let room of theater['Rooms']">
+        <div class="card-body row" *ngFor="let room of theater['rooms']">
                 <div class="row container">
-                        <p>{{room.Name}}</p>
-                <div class="col-3" *ngFor="let session of room['Sessions']" (click)="getTickets(session, room, theater)">
-                <button class="btn btn-primary btn-session" (mouseenter)="session.isHovering = true" (mouseleave)="session.isHovering = false">
-                        <span *ngIf="!session.isHovering">{{session.Time}} {{session.Date}}</span> <span *ngIf="session.isHovering">Comprar</span>
+                        <p>Sala {{room.number}}</p>
+                <div class="row" *ngFor="let session of room['sessions']" >
+                        <div class="col-3"*ngFor="let date of session['dates']">
+                <button class="btn btn-primary btn-session" (mouseenter)="date.isHovering = true" (click)="getTickets(session, room, theater, date )" style="margin-bottom: 10px; margin-left: 5px;" (mouseleave)="date.isHovering = false">
+                        <span *ngIf="!date.isHovering">{{session.start_session}} {{date}}</span> <span style="font-size: 19px;" *ngIf="date.isHovering">Comprar</span>
                 </button>
+                </div>
                 </div>
                 </div>
         </div>

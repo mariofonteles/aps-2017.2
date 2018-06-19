@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { User } from "../../entities/User";
 import { RegisterService } from "../../services/registerService";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -14,11 +15,10 @@ export class RegisterComponent {
 
     
 
-    constructor(private registerService: RegisterService) {}
+    constructor(private registerService: RegisterService, private router: Router) {}
 
 
     register() {
-        debugger;
 
         let payloadDto= {
             user: {email: this.userModel.email, password: this.userModel.password},
@@ -27,7 +27,12 @@ export class RegisterComponent {
             birth_date: this.userModel.birthdate
         }
 
-        this.registerService.registerUser(payloadDto)
+        this.registerService.registerUser(payloadDto).then ( () => {
+            this.router.navigate(['/login'])
+        })
+
+
+
 
     }
 

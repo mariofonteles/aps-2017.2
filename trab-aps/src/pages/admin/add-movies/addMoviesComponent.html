@@ -1,26 +1,52 @@
 <div class="container">
     <div class="form-group">
-            <label for="exampleFormControlSelect1">Escolha o cinema</label>
-            <select class="form-control" [(ngModel)]="selectedStore" required>
-              <option value="{{theater.Id}}" *ngFor="let theater of stores">{{theater.Name}}</option>
+            <label for="exampleFormControlSelect1">Escolha o(s) cinema(s)</label>
+            <select class="form-control" [(ngModel)]="selectedStore" multiple>
+              <option value="{{theater.id}}" *ngFor="let theater of stores">{{theater.name}}</option>
             </select>
     </div>
-    <div *ngFor="let movie of movies">
     <div class="form-group">
         <label for="exampleInputEmail1">Nome do filme</label>
-        <input type="email" class="form-control" [(ngModel)] = "movie.Name" required>
+        <input type="text" class="form-control" [(ngModel)] = "movie.title" required>
+        <label for="exampleInputEmail1">Diretor</label>
+        <input type="text" class="form-control" [(ngModel)] = "movie.director" required>
+        <label for="exampleInputEmail1">Sinopse</label>
+        <input type="text" class="form-control" [(ngModel)] = "movie.synopsis" required>
+        <label for="exampleInputEmail1">Duração</label>
+        <input type="text" class="form-control" [(ngModel)] = "movie.duration" required>
         <label for="exampleInputEmail1">Imagem</label>
         <input type="file" class="form-control" (change)="handleFileSelect($event, movie)" required>
         <label for="exampleInputEmail1">Classificação</label>
-        <input type="email" class="form-control" [(ngModel)] = "movie.Age" required>
+        <select type="email" class="form-control" [(ngModel)]="movie.censorship">
+            <option value="0">Livre</option>
+            <option value="10">10 anos</option>
+            <option value="12">12 anos</option>
+            <option value="16">16 anos</option>
+            <option value="18">18 anos</option>
+        </select>
         <label for="exampleInputEmail1">Gênero</label>
-        <input type="email" class="form-control" [(ngModel)] = "movie.Gender" required>
+        <select type="email" class="" [(ngModel)] = "movie.genre" class="form-control" required>
+                <option value="0">Qualquer</option>
+                <option value="1">Ação</option>
+                <option value="2">Aventure</option>
+                <option value="3">Comédia</option>
+                <option value="4">Documentário</option>
+                <option value="5">Fantasia</option>
+                <option value="6">Faroeste</option>
+                <option value="7">Ficção Cientifica</option>
+                <option value="8">Guerra</option>
+                <option value="9">Musicais</option>
+                <option value="10">Pornográfico</option>
+                <option value="11">Romance</option>
+                <option value="12">Suspense</option>
+                <option value="13">Terror</option>
+                <option value="14">Tragédia</option>
+        </select>
     </div>
+
     </div>
-    <button  (click)="addMovie()"class="btn btn-primary">+ sala</button>
     <div class="row">
     <div class="container">
-            <button class="btn btn-success" (click)="submit()"> Enviar</button>
-    </div>
+            <button class="btn btn-primary" (click)="send()"> Enviar</button>
     </div>
 </div>

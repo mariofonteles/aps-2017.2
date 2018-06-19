@@ -1,36 +1,40 @@
 <div class="container">
     <div class="form-group">
-        <label>Filme</label>
-        <select class="form-control" [(ngModel)]="selectedMovie">
-            <option *ngFor="let movie of movies" value="movie.Id">{{movie.Name}}</option>
-        </select>
         <label>Cinema</label>
-        <select class="form-control" [(ngModel)]="selectedStore">
-            <option *ngFor="let store of stores" value="store">{{store.Name}}</option>
+        <select class="form-control" [(ngModel)]="selectedStore" (change)="updateMovies(selectedStore)">
+            <option *ngFor="let store of stores" [ngValue]="store">{{store.name}}</option>
         </select>
-        <label>Sala</label>
-        <select class="form-control" *ngIf="selectedStore" [(ngModel)]="selectedRoom">
-            <option *ngFor="let room of selectedStore.Rooms" value="room">{{room.number}}{{room.letter}}</option>
-        </select>
-    </div>
+    <div class="form-group border border-info" *ngFor="let element of moviesSelect">
+            <label>Filme</label>
+            <p>{{element.title}}</p>
+            <!--<select class="form-control" [(ngModel)]="selectedMovie" *ngIf="selectedStore">
+                <option *ngFor="let movie of selectedStore.movies" value="{{movie.id}}">{{movie.title}}</option>
+            </select>!-->
+            <label>Sala</label>
+            <select class="form-control" [(ngModel)]="element['rooms']" multiple>
+                <option *ngFor="let room of rooms" value="{{room.id}}">{{room.number}}</option>
+            </select>
 
     <div class="form-group">
         <div *ngFor="let session of sessions">
         <h3>Sessão</h3>
-        <label>Horário</label>
+        <label>Horário (ex: 15:40:00)</label>
         <input type="text" class="form-control" [(ngModel)]="session.Time">
         <label>Dias da semana</label>
-        <select [(ngModel)]="session.daysOfWeek" multiple>
-            <option value="1">Domingo</option>
-            <option value="2">Segunda</option>
-            <option value="3">Terça</option>
-            <option value="4">Quarta</option>
-            <option value="5">Quinta</option>
-            <option value="6">Sexta</option>
-            <option value="7">Sábado</option>
+        <select [(ngModel)]="session.daysOfWeek" class="form-control" multiple>
+            <option value="0">Domingo</option>
+            <option value="1">Segunda</option>
+            <option value="2">Terça</option>
+            <option value="3">Quarta</option>
+            <option value="4">Quinta</option>
+            <option value="5">Sexta</option>
+            <option value="6">Sábado</option>
         </select>
+        <label>Preço</label>
+        <input type="number" class="form-control" [(ngModel)]="session.price">
         </div>
     </div>
-    <button class="btn btn-primary" (click)="addSession()">+ Sessão</button>
+
+    <button class="btn btn-primary" (click)="send()">Enviar</button>
 
 </div>

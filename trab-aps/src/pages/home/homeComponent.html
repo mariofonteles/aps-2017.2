@@ -6,9 +6,9 @@
 
 <div class="row">
     <div class="col" *ngFor="let movie of movies" (click)="goToSessions(movie)">
-        <label>{{movie.Name}}</label>
+        <label>{{movie.title}}</label>
     <br>
-        <img src="{{movie.Image}}" class="movie-img">
+        <img src="{{movie.photo_poster}}" class="movie-img" style="cursor: pointer;">
     </div>
 </div>
 

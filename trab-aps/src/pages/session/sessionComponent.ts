@@ -18,10 +18,10 @@ import { Seat } from "../../entities/Seat";
 export class sessionComponent implements OnInit {
     @Input() model: Movies; 
     sessions: Array<Session> = []
-    selectedMovie: Movies
+    selectedMovie: any
     selectedSession: Session
     selectedDay: any
-    theaters: Array<Theater>
+    theaters: Array<any>
     theatersFromApi: Array<Theater>
     sub: any
     weekDays: Array<any> = []
@@ -31,12 +31,19 @@ export class sessionComponent implements OnInit {
     constructor( private sessionService: SessionService, private router: Router, private route: ActivatedRoute){}
 
     ngOnInit() {
+        debugger;
         let realMovie = JSON.parse(localStorage.getItem('selectedMovie'))
-        this.sub = this.route.params.subscribe( params => {
+        /*this.sub = this.route.params.subscribe( params => {
             this.selectedMovie = new Movies({ Name: params.name, Id: params.id, Image: localStorage.getItem('imageCurrent')})
-        })
+        })*/
 
-        let rooms = [ new Room( {
+        this.selectedMovie = JSON.parse(localStorage.getItem("selectedMovie"))
+
+        this.theaters = this.selectedMovie.stores
+
+        debugger;
+
+        /*let rooms = [ new Room( {
             Name: 'Sala 1',
             Id: 1,
             Sessions: [new Session({Date: `${new Date().getDate()}/0${new Date().getMonth()+1}`, Time: '19:40', price: "19.00"}), 
@@ -58,7 +65,7 @@ export class sessionComponent implements OnInit {
 
         this.weekDays = [{date: `${new Date().getDate()}/0${new Date().getMonth()+1}`}, 
         {date: `${new Date().getDate()+1}/0${new Date().getMonth()+1}`},
-        {date: `${new Date().getDate()+2}/0${new Date().getMonth()+1}`},]
+        {date: `${new Date().getDate()+2}/0${new Date().getMonth()+1}`},]*/
     }
 
     clickDay(day: any) {
@@ -72,13 +79,14 @@ export class sessionComponent implements OnInit {
         //this.sessionsShown = this.sessions.filter( session => session.Date == day.date)
     }
 
-    getTickets(session: Session, room: Room, theater: Theater) {
+    getTickets(session, room, theater, date) {
         debugger;
         let selecaoDto = {
             session: session,
             room: room,
             theater: theater,
-            movie: this.selectedMovie
+            movie: this.selectedMovie,
+            date: date
         }
         debugger;
         localStorage.setItem('selectedSession', JSON.stringify(selecaoDto))

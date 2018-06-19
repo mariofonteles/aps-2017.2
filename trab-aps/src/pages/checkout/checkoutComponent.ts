@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Seat } from "../../entities/Seat";
 import { Movies } from "../../entities/Movies";
+import { CheckoutService } from "../../services/checkoutService";
 
 
 @Component({
@@ -18,32 +19,40 @@ export class CheckoutComponent implements OnInit {
     }
 
     selectedSession: any
-    selectedSeats: Array<Seat> = []
+    selectedSeats: Array<any> = []
     viewModelDto: any
-    seats: Array<Seat>
+    seats: Array<any>
     selectedMovie: Movies
     payment: any = {}
 
-    constructor(){}
+    constructor(private checkoutService: CheckoutService){}
 
     ngOnInit() {
 
         this.selectedSession = JSON.parse(localStorage.getItem('selectedSession'))
 
+        debugger;
+
         this.selectedMovie = this.selectedSession.movie
 
         this.viewModelDto = {
-            cinemaName: this.selectedSession.theater.Name,
-            roomName: this.selectedSession.room.Name,
+            cinemaName: this.selectedSession.theater.name,
+            roomName: this.selectedSession.room.number,
             session: this.selectedSession.session,
-            sessionPrice: this.selectedSession.session.price
+            sessionPrice: this.selectedSession.session.price,
+            date: this.selectedSession.date
         }
 
-        this.seats = this.selectedSession.room.free_seats
+        debugger;
+
+        this.seats = this.selectedSession.session.seats
         this.seats.map( seat => seat.price = this.viewModelDto.sessionPrice) 
+        this.seats.filter( seat => seat.buy_registers.length == 0)
     }
 
     selectSeat(seat: Seat) {
+        if (this.selectedSeats.length == 4)
+            return 
         seat.clicked = !seat.clicked
         if (this.selectedSeats.includes(seat))
             this.selectedSeats = this.selectedSeats.filter( seatInArray => seatInArray != seat)
@@ -61,10 +70,36 @@ export class CheckoutComponent implements OnInit {
 
     buy() {
         debugger;
+        let seats = []
+        for (let seat of this.selectedSeats)
+            seats.push(seat.id)
         let buyDto = {
-            seats: this.selectedSeats,
+            movie_id: this.selectedSession.movie.id,
+            session_id: this.selectedSession.session.id,
+            session_start: this.selectedSession.session.start_session,
+            session_date: this.selectedSession.date,
+            room_id: this.selectedSession.room.id,
+
+            seats_id: seats,
+
+            sessionPrice: this.currentPrice,
+            number_midle_ticket: this.selectedSeats.length
 
         }
+
+        let cardDto = {
+            security_number: this.payment.securityNumber,
+            number_card: this.payment.cardNumber,
+            card_holder_name: this.payment.cardHolderName,
+            due_date: this.payment.dueDate
+        }
+
+        debugger;
+
+        this.checkoutService.send(buyDto).then( r => {
+
+            this.checkoutService.saveCard(cardDto)
+        })
 
         //TODO
     }

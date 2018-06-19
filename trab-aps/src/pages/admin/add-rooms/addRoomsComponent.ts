@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Theater } from "../../../entities/Theater";
 import { Room } from "../../../entities/Room";
+import { StoreService } from "../../../services/storeService";
+import { RoomService } from "../../../services/roomService";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -11,14 +14,12 @@ export class addRoomsComponent implements OnInit {
 
     existingStores: Array<Theater>
     rooms: Array<Room> = [new Room()]
-    selectedStore: number
+    selectedStore: Array<number> = []
 
-    constructor(){}
+    constructor( private storeService: StoreService, private roomService: RoomService, private router: Router){}
 
     ngOnInit(){
 
-        this.existingStores = [new Theater( {Name: 'Cinema Tal', Id: '3'} ), 
-                                new Theater( {Name: 'O tal do Cinema', Id: '4'})]
 
     }
 
@@ -28,9 +29,18 @@ export class addRoomsComponent implements OnInit {
 
     submit() {
         let payload = {
-            selected_store: Number(this.selectedStore),
+            store: 1 //ESPERANDO O GET
+            ,
             rooms: this.rooms
         }
+
+        debugger;
+
+        this.roomService.create(payload).then(
+            () => {
+                this.router.navigate(['/admin'])
+            }
+        )
 
     }
 }
